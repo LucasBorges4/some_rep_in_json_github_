@@ -3,7 +3,6 @@ import requests as req
 import webbrowser as wb
 
 
-arquivo = '/home/lucasborges/Downloads/archive/ProjetosGithub.json/Deep-Learning.json'
 github = 'https://github.com/'
 
 ## O arquivo ser� lido at� o fim, com opç�o de ir e seguir o c�digo.
@@ -26,7 +25,6 @@ def archive_read_and_request(arquivo):
         if acesso == 's':
             link = github + objeto['full_name']
             wb.open(link)
-
         elif acesso == 'sair':
             break
         elif acesso == 'n':
@@ -35,6 +33,7 @@ def archive_read_and_request(arquivo):
             print('\033[31mErro')
             return 0
 
+# ____Local de execução_____
 if __name__ == '__main__':
     endereço = str(input('Diga o caminho do arquivo json.'))
-    archive_read_and_request(arquivo)
+    archive_read_and_request(endereço)
