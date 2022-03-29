@@ -1,39 +1,46 @@
 import json
-import requests as req
 import webbrowser as wb
 
+### Codigo exclusivo para as pastas de 1000 projetos.
+### 
+###
 
 github = 'https://github.com/'
 
-## O arquivo ser� lido at� o fim, com opç�o de ir e seguir o c�digo.
-##
+class js_manipul():
 
-def archive_read_and_request(arquivo):
+    def _openJson(self):
+        with open(str(self), encoding='utf-8') as jsonInConverssing:
+            jsonConverted = json.load(jsonInConverssing)
+            return jsonConverted
 
-    with open(arquivo, encoding='utf-8') as DeepLearning:
-        dados = json.load(DeepLearning)
+    def _readJson(self):
+        contador = 0
+        for objeto in list(self):
+            print(f'\033[33;1m{contador + 1}'
+                  f'\033[32m[{str(objeto["repo_name"]).upper()}]\033[34m\n'
+                  f'[{objeto["description"]}]\033[37m;\n')
+            contador += 1
+            acess = str(input("Deseja acessar a pagina deste projeto? ['s'|'n'|'sair']"))
 
-    contador = 0
-    for objeto in dados:
-        print(f'\033[33;1;4m[{contador+1}]'
-              f'\033[32;0m[{str(objeto["repo_name"]).upper()}]\033[34m\n'
-              f'[{objeto["description"]}]\033[37m;\n')
+            if acess == 's':
+                link = github + objeto['full_name']
+                wb.open(link)
+                continue
 
-        contador += 1
-        acesso = str(input('\033[35mGostaria de acessar o link deste projeto?[s/n/sair]'))
+            elif acess == 'sair':
+                print('Saindo.')
+                break
 
-        if acesso == 's':
-            link = github + objeto['full_name']
-            wb.open(link)
-        elif acesso == 'sair':
-            break
-        elif acesso == 'n':
-            continue
-        else:
-            print('\033[31mErro')
-            return 0
+            elif acess == 'n':
+                continue
+
+            else:
+                print('\033[31mERRO_DO_COMANDO!')
+                return 0
 
 # ____Local de execução_____
 if __name__ == '__main__':
-    endereço = str(input('Diga o caminho do arquivo json.'))
-    archive_read_and_request(endereço)
+    endereço = str(input('Diga o caminho do arquivo json:\n'))
+    abertura = js_manipul._openJson(endereço)
+    js_manipul._readJson(abertura)
