@@ -1,7 +1,7 @@
 import json
 import webbrowser as wb
 
-### Codigo exclusivo para as pastas de 1000 projetos.
+### Código exclusivo para as pastas deste repositório.
 ### 
 ###
 
